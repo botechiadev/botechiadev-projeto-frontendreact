@@ -52,10 +52,7 @@ export const GlobalStyled = createGlobalStyle`
     max-width: 1440px;
   }
   
-  button {
-  padding: 4px;
-    box-shadow: var(--Box-Shadow01);
-  }
+
   
   
   `

@@ -1,5 +1,5 @@
 import styled from "styled-components"; 
-import App from './../../../../App';
+import App from '../../../../App';
 
 export const ButtonOrderCtn = styled.div`
 display: flex;

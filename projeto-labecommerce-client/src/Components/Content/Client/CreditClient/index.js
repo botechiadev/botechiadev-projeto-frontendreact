@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Flex } from '@chakra-ui/react';
 import { CardCtn, CardContent, CardItemImg, CardItemCtn } from './styled';
-import { Label2 , InputNumber, InputSelect, InputText, Div50 } from './../../../Base/Containers/styled';
+import { Label2 , InputNumber, InputSelect, InputText, Div50 } from '../../../Base/Containers/styled';
 
 
 export function CreditClient() {

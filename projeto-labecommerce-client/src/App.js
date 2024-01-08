@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { ChakraProvider, Flex } from '@chakra-ui/react';
 import {Project} from './Views/Project'
 import { GlobalStyled } from './Globals/globalStyled';
-import dataProducts from './Data/dataProducts';
-import { CardProduct } from './Components/Content/ProductsList/CardProduct/index';
-import { OrderCategories } from './Components/Content/Filter/OrderCategories';
-import { ClearFilters } from './Components/Content/Filter/ClearFilters';
-import { OrderPriceCategory } from './Components/Content/Filter/OrderPriceCategory/index';
-import { CreditClient } from './Components/Content/Client/CreditClient/index';
-import { HeaderNav } from './Components/Main/HeaderNav/index';
-import { Footer } from './Components/Base/Footer/index';
+import dataProducts from './data/dataProducts';
+import { CardProduct } from './components/Content/ProductsList/CardProduct/index';
+import FilterPrice from './components/Filters/FilterPrice';
+import { OrderCategories } from './components/Filters/OrderCategories';
+import { ClearFilters } from './components/Filters/ClearFilters';
+import { CreditClient } from './components/Content/Client/CreditClient/index';
+import  HeaderNav  from './components/HeaderNav';
+import  Footer  from './components/Footer';
 import {
   Page,
   MainCtn,
@@ -27,15 +27,18 @@ import {
   Div50,
   DivTotal,
   DivRow,
-} from './Components/Base/Containers/styled';
+} from './components/Base/Containers/styled';
 
 import './Globals/normalize.css';
+import { PriceFilterInputs } from './components/Filters/FilterPrice/FilterPrice';
+import { useContext } from 'react';
+import { FiltersContext } from './common/context/filters-context';
 
 function App() {
   const [modalDisplay, setModalDisplay] = useState(0);
-  const [products, setProducts] = useState([...dataProducts]);
-  const [minValue, setMinValue] = useState(1);
-  const [maxValue, setMaxValue] = useState(200);
+
+  const { products, setProducts, minValue, setMinValue, maxValue, setMaxValue , filteredProducts} = useContext(FiltersContext)
+
   const [carrito, setCarrito] = useState([]);
   const [pages, setPages] = useState(1);
   const [cartItemTotal, setCartItemTotal] = useState(0)
@@ -144,54 +147,12 @@ function App() {
         {pages === 1 ? (
           <MainCtn>
             <AsideRight>
-              <FormContainer>
-                <SectionTitle>Filtros</SectionTitle>
-                <FormFilter>
-                  <label htmlFor="minValue" className="form-label">
-                    Preco Minimo:
-                  </label>
-                  <InputNumber
-                    type="number"
-                    id="minValue"
-                    name="minValue"
-                    min="1"
-                    placeholder="R$30"
-                    value={minValue}
-                    onChange={(e) => filterPriceMin(e.target.value)}
-                  />
-                  <label htmlFor="maxValue" className="form-label">
-                    Preco Maximo:
-                  </label>
-                  <InputNumber
-                    type="number"
-                    id="maxValue"
-                    name="maxValue"
-                    value={maxValue}
-                    placeholder="R$200"
-                    onChange={(e) => filterPriceMax(e.target.value)}
-                  />
-                  <label htmlFor="productName" className="form-label">
-                    Modelo:
-                  </label>
-                  <InputText type="text" id="productName" placeholder="Astro Basket" onChange={(e) => filterName(e.target.value)} />
-                  <CtnType>
-                    <p>Ordenar por TIPO</p>
-                    <OrderCategories filterType={filterType} />
-                    <br />
-                  </CtnType>
-                </FormFilter>
-                <hr />
-              </FormContainer>
+              <FilterPrice />
             </AsideRight>
             <SectionCtn>
-              <SectionTitle>
-                PRODUTOS ENCONTRADOS {products.length}
-                <Flex>
-                  <ClearFilters products={products} setProducts={setProducts} dataProducts={dataProducts} />
-                </Flex>
-              </SectionTitle>
+              <SectionTitle></SectionTitle>
               <br />
-              {[...products].map((product) => (
+              {filteredProducts.map((product) => (
                 <ArticleBox key={product.id}>
                   <CardProduct product={product} />
                   <ButtonCard1 onClick={() => addCart(product)}>
@@ -201,17 +162,11 @@ function App() {
               ))}
             </SectionCtn>
           </MainCtn>
-        ) : pages === 2 ? (
-          <MainCtn>
-            <DivRow>
-              <SectionTitle>Credito Cliente</SectionTitle>
-              <CreditClient />
-            </DivRow>
-          </MainCtn>
         ) : (
           <Project />
         )}
       </Page>
+      <Footer/>
     </ChakraProvider>
   );
 }
