@@ -1,0 +1,23 @@
+[
+  {
+    "id": "p001",
+    "name": "iphone 15",
+    "price": 9000,
+    "imageUrl": "https://i.postimg.cc/52PWK036/iphone15.jpg",
+    "description": "Apple"
+  },
+  {
+    "id": "p002",
+    "name": "fone bluetooth",
+    "price": 120,
+    "imageUrl": "https://i.postimg.cc/gJxKJKBp/fone-ouvido-blueit.webp",
+    "description": "blueIt"
+  },
+  {
+    "id": "p003",
+    "name": "TV 43 Polegadas",
+    "price": 1200,
+    "imageUrl": "https://i.postimg.cc/xTqjW5n3/tv43polegadas.webp",
+    "description": "Samsung"
+  }
+]
