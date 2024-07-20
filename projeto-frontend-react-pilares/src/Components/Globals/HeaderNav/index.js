@@ -35,7 +35,6 @@ return(
           Produtos
           </NavButton>
         <NavButton onClick={showPage2}>Ofertas</NavButton>
-
         <NavButton onClick={showModal}>Carrinho</NavButton>
         <NavButton onClick={showPage3}>Projeto</NavButton>
     </NavList>
